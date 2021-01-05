@@ -611,8 +611,8 @@ class ColorPickerSlider extends StatelessWidget {
 class ColorIndicator extends StatelessWidget {
   const ColorIndicator(
     this.hsvColor, {
-    this.width: 50.0,
-    this.height: 50.0,
+    this.width: 40.0,
+    this.height: 40.0,
   });
 
   final HSVColor hsvColor;

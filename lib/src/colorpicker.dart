@@ -87,6 +87,7 @@ class _ColorPickerState extends State<ColorPicker> {
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).orientation == Orientation.portrait || widget.portraitOnly) {
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
             width: widget.colorPickerWidth,
@@ -104,13 +105,13 @@ class _ColorPickerState extends State<ColorPicker> {
                     children: <Widget>[
                       SizedBox(
                         height: 40.0,
-                        width: widget.colorPickerWidth - 75.0,
+                        width: widget.colorPickerWidth - 60.0,
                         child: colorPickerSlider(TrackType.hue),
                       ),
                       if (widget.enableAlpha)
                         SizedBox(
                           height: 40.0,
-                          width: widget.colorPickerWidth - 75.0,
+                          width: widget.colorPickerWidth - 60.0,
                           child: colorPickerSlider(TrackType.alpha),
                         ),
                     ],
@@ -120,12 +121,12 @@ class _ColorPickerState extends State<ColorPicker> {
             ),
           ),
           if (widget.showLabel)
-            ColorPickerLabel(
-              currentHsvColor,
-              enableAlpha: widget.enableAlpha,
-              textStyle: widget.labelTextStyle,
-            ),
-          SizedBox(height: 20.0),
+            Wrap(children: [Text('#'),Text(_getHexColor())],)
+//            ColorPickerLabel(
+//              currentHsvColor,
+//              enableAlpha: widget.enableAlpha,
+//              textStyle: widget.labelTextStyle,
+//            ),
         ],
       );
     } else {
@@ -174,6 +175,13 @@ class _ColorPickerState extends State<ColorPicker> {
         ],
       );
     }
+  }
+
+ String _getHexColor(){
+    var color = currentHsvColor.toColor();
+   return color.red.toRadixString(16).toUpperCase().padLeft(2, '0')+
+   color.green.toRadixString(16).toUpperCase().padLeft(2, '0')+
+   color.blue.toRadixString(16).toUpperCase().padLeft(2, '0');
   }
 }
 
